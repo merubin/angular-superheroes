@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="superherosApp" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Superhero Phone Book</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 </head>
-<body>
+<body ng-controller="superherosCtrl as vm">
+
+  <div ng-repeat="superhero in vm.superheros">
+    <p> {{ superhero.name}} </p>
+    <p> {{ superhero.phoneNumber}} </p>
+    <p> {{ superhero.affiliation}} </p>
+
+    <img ng-src={{superhero.photo_url}} height="100" width="100">
+  </div>
 
   <script src="app.js"></script>
-</body>
+</body >
 </html>
