@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Superhero Phone Book</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 </head>
 <body ng-controller="superherosCtrl as vm">
+
+
   <h1 id="phtitle">Superhero Phone Book</h1>
+
+  <ul class="menu">
+    <a href="#home">New</a>
+    <a href="#login">Edit</a>
+  </ul>
+
   <div id="feature_photo">
   <!-- <div id="feature_photo" <img ng-src={{superhero.photo_url}} height="100" width="100"> -->
      <img ng-src={{vm.feature_photo}}>
@@ -30,7 +38,7 @@
        <button id="setFeaturePhoto" ng-click="vm.setFeaturePhoto(superhero.name,superhero.photo_url)" >FEATURE</button> </td>
   </tr>
 </table>
-  <script src="app.js"></script>
+
 <!-- create a search form. Use `ng-model` to bind that form's input to a value in the view model. -->
 <p id="SearchBoxSection">Use the searchbox below to filter the phonebook.  Type any characters and the list will be trimmed.</p>
 <div>
@@ -51,6 +59,6 @@ Affilation Highlight
 <button id="resetAffiliation" ng-click="vm.myValue='' " >Clear Highlight</button>
 <!-- <select ng-options="cats for cats in categories" ng-model="orderProps"></select>
 <button ng-click="orderProps='0'">Show all results</button> -->
-
+<script src="js/app.js"></script>
 </body >
 </html>
