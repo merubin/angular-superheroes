@@ -8,19 +8,26 @@
 </head>
 <body ng-controller="superherosCtrl as vm">
   <h1 id="phtitle">Superhero Phone Book</h1>
+  <div id="feature_photo">
   <!-- <div id="feature_photo" <img ng-src={{superhero.photo_url}} height="100" width="100"> -->
+     <img ng-src={{vm.feature_photo}}>
+     <p>{{vm.feature_name}}</p>
+  </div>
   <table id="pbresults" style="width:100%">
   <tr id="pbheader">
     <th>Superhero</th>
     <th>Phone Number</th>
     <th>Affiliation</th>
-    <th>Photo</th>
+    <th>Thumbnail</th>
+    <th>Feature Photo</th>
   </tr>
   <tr id="pbrows" ng-repeat="superhero in vm.superheros | filter :vm.search">
-    <td> {{ superhero.name}} </td>
-    <td> {{ superhero.phoneNumber | phone }} </td>
-    <td> {{ superhero.affiliation}} </td>
-    <td id="pbthumbnail"><img ng-src={{superhero.photo_url}}></td>
+    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.name}} </td>
+    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.phoneNumber | phone }} </td>
+    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.affiliation}} </td>
+    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }" id="pbthumbnail"><img ng-src={{superhero.photo_url}}></td>
+    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }">
+       <button id="setFeaturePhoto" ng-click="vm.setFeaturePhoto(superhero.name,superhero.photo_url)" >FEATURE</button> </td>
   </tr>
 </table>
   <script src="app.js"></script>
@@ -32,6 +39,18 @@
   <p>User input: {{vm.search}}</p>
   <p> Last Search Term Entered: {{vm.lastSearchTerm}} </p>
 </div>
+
+
+<p id="AffilationSection">Use the DropDown below to Highlight Records of Affiliations in phonebook. </p>
+
+Affilation Highlight
+ <select id="affiliation" ng-model="vm.myValue" ng-options="superhero.affiliation for superhero in vm.superheros">  </select>
+    <!-- <option ng-repeat="item in items" value="{{item.age}}">{{item.name}}</option>
+   ng-options="item.name for item in items"
+         <option ng-repeat= "superhero in vm.superheros" value="{{superhero.affiliation}}" > {{superhero.affiliation}} </option> -->
+<button id="resetAffiliation" ng-click="vm.myValue='' " >Clear Highlight</button>
+<!-- <select ng-options="cats for cats in categories" ng-model="orderProps"></select>
+<button ng-click="orderProps='0'">Show all results</button> -->
 
 </body >
 </html>

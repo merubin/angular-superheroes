@@ -21,6 +21,9 @@ function superherosController () {
   this.superheros = superheroPhonebook
   this.newSuperhero={}   /* initial new todo */
   this.lastSearchTerm=""
+  this.myValue=""
+  this.feature_photo=superheroPhonebook[0].photo_url
+  this.feature_name=superheroPhonebook[0].name
   this.addSuperhero = function () {
 
     this.newSuperhero={ name:this.newSuperhero.name, affiliation:this.newSuperhero.affiliation,
@@ -30,6 +33,12 @@ function superherosController () {
     this.newSuperhero={ name: '', affiliation: '',
                      phoneNumber:'', photo_url: '' }
   }
+
+this.setFeaturePhoto=function(name,url){
+  this.feature_photo=url
+  this.feature_name=name
+}
+
   this.searchSuperhero= function(){
    console.log('Search Pressed'+this.search)
    this.lastSearchTerm=this.search
