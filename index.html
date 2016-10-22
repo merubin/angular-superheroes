@@ -7,15 +7,31 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 </head>
 <body ng-controller="superherosCtrl as vm">
-
-  <div ng-repeat="superhero in vm.superheros">
-    <p> {{ superhero.name}} </p>
-    <p> {{ superhero.phoneNumber}} </p>
-    <p> {{ superhero.affiliation}} </p>
-
-    <img ng-src={{superhero.photo_url}} height="100" width="100">
-  </div>
-
+  <h1 id="phtitle">Superhero Phone Book</h1>
+  <!-- <div id="feature_photo" <img ng-src={{superhero.photo_url}} height="100" width="100"> -->
+  <table id="pbresults" style="width:100%">
+  <tr id="pbheader">
+    <th>Superhero</th>
+    <th>Phone Number</th>
+    <th>Affiliation</th>
+    <th>Photo</th>
+  </tr>
+  <tr id="pbrows" ng-repeat="superhero in vm.superheros | filter :vm.search">
+    <td> {{ superhero.name}} </td>
+    <td> {{ superhero.phoneNumber | phone }} </td>
+    <td> {{ superhero.affiliation}} </td>
+    <td id="pbthumbnail"><img ng-src={{superhero.photo_url}}></td>
+  </tr>
+</table>
   <script src="app.js"></script>
+<!-- create a search form. Use `ng-model` to bind that form's input to a value in the view model. -->
+<p id="SearchBoxSection">Use the searchbox below to filter the phonebook.  Type any characters and the list will be trimmed.</p>
+<div>
+  <input id="SearchButton" type="text" ng-model="vm.search">
+  <button ng-click="vm.searchSuperhero()">SEARCH</button>
+  <p>User input: {{vm.search}}</p>
+  <p> Last Search Term Entered: {{vm.lastSearchTerm}} </p>
+</div>
+
 </body >
 </html>
