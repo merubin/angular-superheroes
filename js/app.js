@@ -19,16 +19,27 @@ angular
 
 function superherosController () {
   this.superheros = superheroPhonebook
-  this.newSuperhero={}   /* initial new todo */
+  this.newSuperhero={}
+  this.editSuperhero={}
+  this.editIndex=0
   this.lastSearchTerm=""
   this.myValue=""
   this.show_phonebook=true
   this.show_editphonebook=false
+  this.show_addphonebook=false
   this.feature_photo=superheroPhonebook[0].photo_url
   this.feature_name=superheroPhonebook[0].name
   this.addNewSuperhero = function () {
     this.show_phonebook=false
+    this.show_editphonebook=false
+    this.show_addphonebook=true
+  }
+  this.editSuperhero = function (index) {
+    this.show_phonebook=false
     this.show_editphonebook=true
+    this.show_addphonebook=false
+    this.editSuperhero=this.superheros[index]
+    this.editIndex=index
   }
   this.toggle = function() {
             this.show_phonebook = !this.show_phonebook;
@@ -44,7 +55,21 @@ function superherosController () {
                      phoneNumber:'', photo_url: '' }
     this.show_phonebook=true
     this.show_editphonebook=false
+    this.show_addphonebook=false
   }
+
+  this.updateSuperhero = function () {
+     console.log("this index=",this.editIndex)
+    this.superheros[this.editIndex].name = this.editSuperhero.name
+    this.superheros[this.editIndex].phoneNumber=this.editSuperhero.phoneNumber
+    this.superheros[this.editIndex].affiliation=this.editSuperhero.affiliation
+    this.superheros[this.editIndex].photo_url=this.editSuperhero.photo_url
+
+    this.show_phonebook=true
+    this.show_editphonebook=false
+    this.show_addphonebook=false
+  }
+
 
 this.setFeaturePhoto=function(name,url){
   this.feature_photo=url

@@ -58,23 +58,23 @@
         <th>Phone Number</th>
         <th>Affiliation</th>
         <th>Thumbnail</th>
-        <th>Feature Photo</th>
+        <th>Feature/Edit</th>
       </tr>
       <tr id="pbrows" ng-repeat="superhero in vm.superheros | filter :vm.search">
         <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.name}}</td>
         <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.phoneNumber | phone }} </td>
         <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.affiliation}} </td>
         <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }" id="pbthumbnail"><img ng-src={{superhero.photo_url}}></td>
-        <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> <button id="setFeaturePhoto" ng-click="vm.setFeaturePhoto(superhero.name,superhero.photo_url)" >FEATURE</button> </td>
+        <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }">
+          <button id="setFeaturePhoto" ng-click="vm.setFeaturePhoto(superhero.name,superhero.photo_url)" >FEATURE</button>
+          <button id="setFeaturePhoto" ng-click="vm.editSuperhero( $index )" >EDIT</button></td>
       </tr>
     </table>
 
   </div> <!-- phonebook_box  -->
 
-  <div id="addphonebookentry_box" ng-show="vm.show_editphonebook" >
-
+  <div id="addphonebookentry_box" ng-show="vm.show_addphonebook" >
     <div id="newSuperheroForm">
-
       Name<input type="text" ng-model = "vm.newSuperhero.name">
       PhoneNumber:<input type="text" ng-model = "vm.newSuperhero.phoneNumber">
       Affilliation:<input type="text" ng-model = "vm.newSuperhero.affiliation">
@@ -82,6 +82,18 @@
       <button class="button" ng-click = "vm.addSuperhero()">Add Superhero </button>
     </div> <!-- newSuperheroForm -->
   </div>  <!-- addphonebookentry_box  -->
+
+
+  <div id="editphonebookentry_box" ng-show="vm.show_editphonebook" >
+    <div id="newSuperheroEditForm">
+      Name<input id="name" type="text"  ng-model = "vm.editSuperhero.name">
+      PhoneNumber:<input id= "phoneNumber"  type="text" ng-model = "vm.editSuperhero.phoneNumber">
+      Affilliation:<input id="affiliation"  type="text" ng-model = "vm.editSuperhero.affiliation">
+      Photo URL<input id="photo_url" type="text"  ng-model = "vm.editSuperhero.photo_url">
+      <button class="button" ng-click = "vm.updateSuperhero()">Submit Edit</button>
+    </div> <!-- newSuperheroForm -->
+  </div>  <!-- addphonebookentry_box  -->
+
 
   <script src="js/app.js"></script>
 
