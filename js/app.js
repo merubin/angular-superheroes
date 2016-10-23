@@ -5,9 +5,8 @@ superheroPhonebook = [
   { name: 'Blacklight', affiliation : "Image", phoneNumber: 8124242222, photo_url: "images/blacklight.jpg"},
   { name: 'Wonder Woman', affiliation : "DC", phoneNumber: 2036917716, photo_url: "images/wonder-woman.jpg"}
 
-
 ]
-//  setter
+
 angular
 .module('superherosApp', [])
 .controller("superherosCtrl", [ superherosController ])
@@ -18,15 +17,23 @@ angular
   return("("+number.substring(0,3)+") "+number.substring(3,6)+"-"+number.substring(6,10))
 }})
 
-
-
 function superherosController () {
   this.superheros = superheroPhonebook
   this.newSuperhero={}   /* initial new todo */
   this.lastSearchTerm=""
   this.myValue=""
+  this.show_phonebook=true
+  this.show_editphonebook=false
   this.feature_photo=superheroPhonebook[0].photo_url
   this.feature_name=superheroPhonebook[0].name
+  this.addNewSuperhero = function () {
+    this.show_phonebook=false
+    this.show_editphonebook=true
+  }
+  this.toggle = function() {
+            this.show_phonebook = !this.show_phonebook;
+            console.log("value of show_phonebook= "+ this.show_phonebook.toString())
+  }
   this.addSuperhero = function () {
 
     this.newSuperhero={ name:this.newSuperhero.name, affiliation:this.newSuperhero.affiliation,
@@ -35,6 +42,8 @@ function superherosController () {
     this.superheros.push(superhero)
     this.newSuperhero={ name: '', affiliation: '',
                      phoneNumber:'', photo_url: '' }
+    this.show_phonebook=true
+    this.show_editphonebook=false
   }
 
 this.setFeaturePhoto=function(name,url){
@@ -42,7 +51,7 @@ this.setFeaturePhoto=function(name,url){
   this.feature_name=name
 }
 
-  this.searchSuperhero= function(){
+this.searchSuperhero= function(){
    console.log('Search Pressed'+this.search)
    this.lastSearchTerm=this.search
    document.getElementById("SearchButton").value = "";

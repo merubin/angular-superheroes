@@ -8,65 +8,82 @@
 </head>
 <body ng-controller="superherosCtrl as vm">
 
+  <div id="title_box" >
+    <h1 id="phtitle">Superhero Phone Book</h1>
+  </div> <!-- title_box  -->
 
-  <h1 id="phtitle">Superhero Phone Book</h1>
+<div id="search-feature-hightlight">
+  <div id="search_box" >
+    <!-- create a search form. Use `ng-model` to bind that form's input to a value in the view model. -->
+    <p id="SearchBoxSection">Use the searchbox below to filter the phonebook.  Type any characters and the list will be trimmed.</p>
+    <div>
+      <input id="SearchButton" type="text" ng-model="vm.search">
+      <button ng-click="vm.searchSuperhero()">SEARCH</button>
+      <p>User input: {{vm.search}}</p>
+      <p> Last Search Term Entered: {{vm.lastSearchTerm}} </p>
+    </div>
+  </div> <!-- search_box  -->
+  <div id="feature_box" >
+    <div id="feature_photo">
+      <!-- <div id="feature_photo" <img ng-src={{superhero.photo_url}} height="100" width="100"> -->
+      <img ng-src={{vm.feature_photo}}>
+      <p>{{vm.feature_name}}</p>
+    </div>
 
-  <ul class="menu">
-    <a href="#New">New</a>
-    <a href="#Edit">Edit</a>
-  </ul>
-
-  <div id="feature_photo">
-  <!-- <div id="feature_photo" <img ng-src={{superhero.photo_url}} height="100" width="100"> -->
-     <img ng-src={{vm.feature_photo}}>
-     <p>{{vm.feature_name}}</p>
-  </div>
-
-  <form action="pages/show.html" method="GET">
-  <table id="pbresults">
-  <tr id="pbheader">
-    <th>Superhero</th>
-    <th>Phone Number</th>
-    <th>Affiliation</th>
-    <th>Thumbnail</th>
-    <th>Feature Photo</th>
-  </tr>
-  <tr id="pbrows" ng-repeat="superhero in vm.superheros | filter :vm.search">
-    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }">  <a href="pages/show.html"{{ superhero.name}}> {{ superhero.name}}</a></td>
-    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.phoneNumber | phone }} </td>
-    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.affiliation}} </td>
-    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }" id="pbthumbnail"><img ng-src={{superhero.photo_url}}></td>
-    <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }">
-       <button id="setFeaturePhoto" ng-click="vm.setFeaturePhoto(superhero.name,superhero.photo_url)" >FEATURE</button> </td>
-  </tr>
-</table>
-
-<!-- create a search form. Use `ng-model` to bind that form's input to a value in the view model. -->
-<p id="SearchBoxSection">Use the searchbox below to filter the phonebook.  Type any characters and the list will be trimmed.</p>
-<div>
-  <input id="SearchButton" type="text" ng-model="vm.search">
-  <button ng-click="vm.searchSuperhero()">SEARCH</button>
-  <p>User input: {{vm.search}}</p>
-  <p> Last Search Term Entered: {{vm.lastSearchTerm}} </p>
-</div>
+  </div> <!-- feature_box  -->
 
 
-<p id="AffilationSection">Use the DropDown below to Highlight Records of Affiliations in phonebook. </p>
-
-Affilation Highlight
- <select id="affiliation" ng-model="vm.myValue" ng-options="superhero.affiliation for superhero in vm.superheros">  </select>
-    <!-- <option ng-repeat="item in items" value="{{item.age}}">{{item.name}}</option>
-   ng-options="item.name for item in items"
-         <option ng-repeat= "superhero in vm.superheros" value="{{superhero.affiliation}}" > {{superhero.affiliation}} </option> -->
-<button id="resetAffiliation" ng-click="vm.myValue='' " >Clear Highlight</button>
-
-<form action="pages/show.html" method="GET">
-    <input type="text" name="serialNumber" />
-    <input type="submit" value="Submit" />
-</form>
+  <div id="highlight_box">
+    <p id="AffilationSection">Use the DropDown below to Highlight Records of Affiliations in phonebook. </p>
+    Affilation Highlight
+    <select id="affiliation" ng-model="vm.myValue" ng-options="superhero.affiliation for superhero in vm.superheros">  </select>
+    <button id="resetAffiliation" ng-click="vm.myValue='' " >Clear Highlight</button>
+  </div> <!-- highlight_box  -->
+</div> <!-- search-feature-hightlight -->
 
 
+  <div id= "menu_box">
+    <ul class="menu">
+      <button ng-click="vm.toggle()">Show/hide Phonebook</button>
+      <button ng-click="vm.addNewSuperhero()">NEW Phonebook Entry</button>
+    </ul>
+  </div> <!-- menu_box  -->
 
-<script src="js/app.js"></script>
+
+  <div id="phonebook box" ng-show="vm.show_phonebook" >
+
+    <table id="pbresults" >
+      <tr id="pbheader">
+        <th>Superhero</th>
+        <th>Phone Number</th>
+        <th>Affiliation</th>
+        <th>Thumbnail</th>
+        <th>Feature Photo</th>
+      </tr>
+      <tr id="pbrows" ng-repeat="superhero in vm.superheros | filter :vm.search">
+        <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.name}}</td>
+        <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.phoneNumber | phone }} </td>
+        <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> {{ superhero.affiliation}} </td>
+        <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }" id="pbthumbnail"><img ng-src={{superhero.photo_url}}></td>
+        <td ng-class="{'pbRowSelect': vm.myValue.affiliation== '{{ superhero.affiliation}}' }"> <button id="setFeaturePhoto" ng-click="vm.setFeaturePhoto(superhero.name,superhero.photo_url)" >FEATURE</button> </td>
+      </tr>
+    </table>
+
+  </div> <!-- phonebook_box  -->
+
+  <div id="addphonebookentry_box" ng-show="vm.show_editphonebook" >
+
+    <div id="newSuperheroForm">
+
+      Name<input type="text" ng-model = "vm.newSuperhero.name">
+      PhoneNumber:<input type="text" ng-model = "vm.newSuperhero.phoneNumber">
+      Affilliation:<input type="text" ng-model = "vm.newSuperhero.affiliation">
+      Photo URL<input type="text" ng-model = "vm.newSuperhero.photo_url">
+      <button class="button" ng-click = "vm.addSuperhero()">Add Superhero </button>
+    </div> <!-- newSuperheroForm -->
+  </div>  <!-- addphonebookentry_box  -->
+
+  <script src="js/app.js"></script>
+
 </body >
 </html>

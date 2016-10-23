@@ -1,45 +1,3 @@
-body  {
-  width:100%
-  height:100%
-}
-
-
-#title_box {
-
-}
-
-#search-feature-hightlight {
-  padding-top:10px;
-  border-top: 1px solid #ddd;;
-  border-bottom: 1px solid #ddd;;
-  display:flex;
-  justify-content: space-around;
-}
-
-#menu_box {
-background-color:  #ddd;
-}
-
-#highlight_box {
-
-width: 35%;
-align-content: space-around;;
- flex-grow: 3;
-}
-
-#feature_box {
-width: 30%;
-  align-content: space-between;
- flex-grow: 5;
-
-}
-#search_box {
- width: 35%;
- align-content: space-between;
- flex-grow: 3;
-
-}
-
 #phtitle {
   text-align: center;
 }
@@ -96,6 +54,8 @@ padding-bottom: 5px
 }
 
 #feature_photo img {
-  height: 250px;
+  height: 300px;
   width: auto;
+  display: block;
+  margin: auto;
 }
